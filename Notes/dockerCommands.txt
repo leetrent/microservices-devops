@@ -1,0 +1,2 @@
+docker run -d -p 8080:80 --name myapp shopping.client:latest
+docker run -d -p 8080:80 --name myapp shoppingclient:latest

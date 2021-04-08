@@ -1,0 +1,9 @@
+docker login 
+
+docker tag <image id> <docker user name><docker repository name>
+Example:
+docker tag 84b8a5de40d8 leetrent/shoppingapp
+
+docker push <docker image name>:latest
+Example:
+docker push leetrent/shoppingapp:latest
