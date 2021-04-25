@@ -1,10 +1,10 @@
-﻿using Shopping.Client.Models;
+﻿using Shopping.API.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Shopping.Client.Data
+namespace Shopping.API.Data
 {
     public static class ProductContext
     {
@@ -12,7 +12,7 @@ namespace Shopping.Client.Data
         {
             new Product()
                 {
-                    Name = "IPhone X",
+                    Name = "IPhone X (from Shopping.API)",
                     Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
                     ImageFile = "product-1.png",
                     Price = 950.00M,
