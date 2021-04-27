@@ -1,0 +1,25 @@
+$ docker exec -it shopping-mongo /bin/bash
+
+# Start Mongo CLI:
+$ mongo
+
+# List Existing DBs:
+$ show dbs
+
+# Create new Mongo database:
+$ use CatalogDb
+
+# Create a Mongo collections inside of Mongo database:
+$ db.createCollection('Products')
+
+$ db.Products.insertMany([{'Name':'Asus Laptop','Category':'Computers','Summary':'Summary','Description':'Description','ImageFile':'ImageFile','Price':54.93},{'Name':'HP Laptop','Category':'Computers','Summary':'Summary','Description':'Description','ImageFile':'ImageFile','Price':88.93}])
+
+# Select from newly created Products collection:
+$ db.Products.find({}).pretty()
+
+# Remove Products Collection:
+$ db.Products.remove()
+
+$ show databases
+
+$ show collections
