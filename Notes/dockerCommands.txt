@@ -1,2 +1,21 @@
 docker run -d -p 8080:80 --name myapp shopping.client:latest
 docker run -d -p 8080:80 --name myapp shoppingclient:latest
+
+# Stop all running containers:
+$ docker stop $(docker ps -aq)
+
+#Remove all stopped containers:
+$ docker rm $(docker ps --filter status=exited -q)
+
+#List all Docker images:
+$ docker images -a
+
+# Remove all Docker images:
+$ docker rmi $(docker images -a -q)
+
+# List all dangling images:
+$ docker images -f dangling=true
+
+# Remove dangling images:
+docker image prune
+
