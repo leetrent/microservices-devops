@@ -64,6 +64,8 @@ http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kube
 $ k delete -f ./nginx-depl.yaml
 deployment.apps "nginx-depl" deleted
 
+$ k delete -f ./nginx-service.yaml
+service "nginx-service" deleted
 
 
 
