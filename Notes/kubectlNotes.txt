@@ -126,6 +126,22 @@ $ k get pod mongo-deployment-9c5b4dddb-7qkh7 -o wide
 NAME                               READY   STATUS    RESTARTS   AGE   IP          NODE             NOMINATED NODE   READINESS GATES
 mongo-deployment-9c5b4dddb-7qkh7   1/1     Running   0          19m   10.1.0.65   docker-desktop   <none>           <none>
 
+$ k apply -f shoppingapi.yaml
+deployment.apps/shoppingapi-deployment created
+service/shoppingapi-service created
+
+$ k get service
+NAME                  TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+kubernetes            ClusterIP   10.96.0.1        <none>        443/TCP          6d13h
+mongo-service         ClusterIP   10.109.190.228   <none>        27017/TCP        13h
+shoppingapi-service   NodePort    10.99.62.175     <none>        8000:31000/TCP   2m59s
+
+$ k apply -f shoppingapi.yaml
+deployment.apps/shoppingapi-deployment configured
+service/shoppingapi-service unchanged
+
+
+
 
 
 
