@@ -140,6 +140,22 @@ $ k apply -f shoppingapi.yaml
 deployment.apps/shoppingapi-deployment configured
 service/shoppingapi-service unchanged
 
+$ k apply -f mongo-configmap.yaml
+configmap/mongo-configmap created
+
+$ k get cm
+NAME              DATA   AGE
+mongo-configmap   1      45s
+
+$ k apply -f shoppingapi.yaml
+deployment.apps/shoppingapi-deployment configured
+service/shoppingapi-service unchanged
+
+$ k get pods
+NAME                                     READY   STATUS    RESTARTS   AGE
+mongo-deployment-9c5b4dddb-7qkh7         1/1     Running   2          14h
+shoppingapi-deployment-967cbcf58-zd58q   1/1     Running   0          63s
+
 
 
 
