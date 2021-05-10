@@ -156,6 +156,20 @@ NAME                                     READY   STATUS    RESTARTS   AGE
 mongo-deployment-9c5b4dddb-7qkh7         1/1     Running   2          14h
 shoppingapi-deployment-967cbcf58-zd58q   1/1     Running   0          63s
 
+$ k apply -f ./shoppingapi-configmap.yaml
+configmap/shoppingapi-configmap created
+
+$ k get cm
+NAME                    DATA   AGE
+mongo-configmap         1      169m
+shoppingapi-configmap   1      46s
+
+$ k apply -f ./shoppingclient.yaml
+deployment.apps/shoppingclient-deployment created
+service/shoppingclient-service created
+
+
+
 
 
 
