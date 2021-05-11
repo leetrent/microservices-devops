@@ -168,6 +168,23 @@ $ k apply -f ./shoppingclient.yaml
 deployment.apps/shoppingclient-deployment created
 service/shoppingclient-service created
 
+# TROUBLESHOOTING
+$ k get pod shoppingclient-deployment-5978586655-x2nqr -o wide
+$ k describe pod shoppingclient-deployment-5978586655-x2nqr
+$ k logs shoppingclient-deployment-5978586655-x2nqr
+
+
+$ k delete -f shoppingclient.yaml
+deployment.apps "shoppingclient-deployment" deleted
+service "shoppingclient-service" deleted
+
+$ k apply -f ./shoppingclient.yaml
+deployment.apps/shoppingclient-deployment created
+service/shoppingclient-service created
+
+
+
+
 
 
 
