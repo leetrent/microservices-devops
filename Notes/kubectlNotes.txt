@@ -182,9 +182,9 @@ $ k apply -f ./shoppingclient.yaml
 deployment.apps/shoppingclient-deployment created
 service/shoppingclient-service created
 
-#####################################################
+######################################################
 # DELETE ALL Kubernetes RESOURCES IN A CERTAIN FOLDER
-#####################################################
+######################################################
 $ k delete -f .
 configmap "mongo-configmap" deleted
 secret "mongo-secret" deleted
@@ -200,6 +200,24 @@ $ k get all
 NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
 service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   7d17h
 
+######################################################
+# GET Kubernetes CONFIGURATIONS
+######################################################
+$ k config get-contexts
+CURRENT   NAME                                                    CLUSTER                                                 AUTHINFO                                                NAMESPACE
+*         docker-desktop                                          docker-desktop                                          docker-desktop
+          gke_ticketing-windows_us-central1-c_ticketing-windows   gke_ticketing-windows_us-central1-c_ticketing-windows   gke_ticketing-windows_us-central1-c_ticketing-windows
+
+######################################################
+# GET CURRENT Kubernetes CONTEXT
+######################################################
+$ k config current-context
+docker-desktop
+
+######################################################
+# SWITCH TO A DIFFERENT Kubernetes CONTEXT
+######################################################
+$ k config use-context <name of context>
 
 
 
