@@ -182,6 +182,25 @@ $ k apply -f ./shoppingclient.yaml
 deployment.apps/shoppingclient-deployment created
 service/shoppingclient-service created
 
+#####################################################
+# DELETE ALL Kubernetes RESOURCES IN A CERTAIN FOLDER
+#####################################################
+$ k delete -f .
+configmap "mongo-configmap" deleted
+secret "mongo-secret" deleted
+deployment.apps "mongo-deployment" deleted
+service "mongo-service" deleted
+configmap "shoppingapi-configmap" deleted
+deployment.apps "shoppingapi-deployment" deleted
+service "shoppingapi-service" deleted
+deployment.apps "shoppingclient-deployment" deleted
+service "shoppingclient-service" deleted
+
+$ k get all
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   7d17h
+
+
 
 
 
