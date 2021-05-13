@@ -1,0 +1,13 @@
+$ az --version
+
+# List Azure Locations
+$ az account list-locations -o table
+
+# Create Azure Resource Group
+az group create -l centralus -n MyResourceGroup
+
+# Create Azure Container Registry
+$ az acr create --resource-group myResourceGroup --name shoppingacr --sku Basic
+
+# Enable Admin User Account
+$ az acr update -n shoppingacr --admin-enabled true
