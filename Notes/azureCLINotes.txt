@@ -73,4 +73,25 @@ AcrLoginServer
 ----------------------
 shoppingacr.azurecr.io
 
+$ az acr repository list --name shoppingacr --output table
+Result
+--------------
+shoppingapi
+shoppingclient
+
+$ k create secret docker-registry acr-secret \ --docker-server=<my-docker-server> \ --docker-username=<my-docker-username> \ --docker-password=<my-docker-password> \ --docker-email=<my-docker-email>
+
+
+$  k create secret docker-registry acr-secret \
+> --docker-server=<my-docker-server> \
+> --docker-username=<my-docker-username> \
+> --docker-password=<my-docker-password> \
+> --docker-email=my-docker-email
+secret/acr-secret created
+
+$ k get secret
+
+
+
+
 
