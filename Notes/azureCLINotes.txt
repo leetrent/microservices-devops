@@ -91,6 +91,26 @@ secret/acr-secret created
 
 $ k get secret
 
+$ k config current-context
+
+$ k apply .
+
+$ k apply -f .
+configmap/mongo-configmap unchanged
+secret/mongo-secret unchanged
+deployment.apps/mongo-deployment unchanged
+service/mongo-service unchanged
+configmap/shoppingapi-configmap unchanged
+deployment.apps/shoppingapi-deployment created
+service/shoppingapi-service created
+deployment.apps/shoppingclient-deployment created
+service/shoppingclient-service created
+
+$ k get svc
+
+# TROUBLESHOOTING:
+$ k get pod
+$ k describe pod <pod-name>
 
 
 
