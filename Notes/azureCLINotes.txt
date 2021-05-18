@@ -112,6 +112,67 @@ $ k get svc
 $ k get pod
 $ k describe pod <pod-name>
 
+# SCALING (IMPERATIVE)
+$ k get all
+$ k scale --replicas=3 deployment.apps/shoppingclient-deployment
+
+# SCALING (DECLARATIVE)
+$ k apply -f .
+configmap/mongo-configmap unchanged
+secret/mongo-secret unchanged
+deployment.apps/mongo-deployment unchanged
+service/mongo-service unchanged
+configmap/shoppingapi-configmap unchanged
+deployment.apps/shoppingapi-deployment unchanged
+service/shoppingapi-service unchanged
+deployment.apps/shoppingclient-deployment configured
+service/shoppingclient-service unchanged
+
+# CHECK AKS VERSION
+$ az aks show --resource-group myResourceGroup --name myAKSCluster --query kubernetesVersion --output table
+Result
+--------
+1.19.9
+
+# shoppingautoscalse.yaml
+$ k apply -f .
+configmap/mongo-configmap unchanged
+secret/mongo-secret unchanged
+deployment.apps/mongo-deployment unchanged
+service/mongo-service unchanged
+configmap/shoppingapi-configmap unchanged
+deployment.apps/shoppingapi-deployment unchanged
+service/shoppingapi-service unchanged
+horizontalpodautoscaler.autoscaling/shoppingapi-hpa created
+horizontalpodautoscaler.autoscaling/shoppingclient-hpa created
+deployment.apps/shoppingclient-deployment unchanged
+service/shoppingclient-service unchanged
+
+$ k get hpa
+NAME                 REFERENCE                              TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
+shoppingapi-hpa      Deployment/shoppingapi-deployment      0%/50%    3         10        3          116s
+shoppingclient-hpa   Deployment/shoppingclient-deployment   0%/50%    3         10        3          116s
+
+$ k get pods
+NAME                                        READY   STATUS    RESTARTS   AGE
+mongo-deployment-9c5b4dddb-4m6vs            1/1     Running   0          24h
+shoppingapi-deployment-5d67b98f4d-4vbgt     1/1     Running   0          24h
+shoppingapi-deployment-5d67b98f4d-6vw92     1/1     Running   0          2m40s
+shoppingapi-deployment-5d67b98f4d-cwqqd     0/1     Pending   0          2m40s
+shoppingclient-deployment-99794699f-ck57z   1/1     Running   0          28m
+shoppingclient-deployment-99794699f-g8pb9   1/1     Running   0          24h
+shoppingclient-deployment-99794699f-w5b4s   0/1     Pending   0          2m40s
+
+# TROUBLESHOOTING
+$ k describe pod shoppingclient-deployment-99794699f-w5b4s
+Events:
+  Type     Reason            Age                  From               Message
+  ----     ------            ----                 ----               -------
+  Warning  FailedScheduling  80s (x4 over 4m13s)  default-scheduler  0/1 nodes are available: 1 Insufficient cpu.
+
+
+
+
 
 
 
