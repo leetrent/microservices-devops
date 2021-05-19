@@ -170,6 +170,46 @@ Events:
   ----     ------            ----                 ----               -------
   Warning  FailedScheduling  80s (x4 over 4m13s)  default-scheduler  0/1 nodes are available: 1 Insufficient cpu.
 
+# UPDATE SHOPPING CLIENT TO v2:
+$ docker images
+$ docker rmi ec7b18504827 -f
+$ docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d
+
+# TEST APP ON LOCALHOST:
+shoppingapi:
+http://localhost:8000/swagger/
+shoppingclient:
+http://localhost:8001/
+
+# SHUT CONTAINERS DOWN on LOCAL MACHNINE:
+$ docker-compose -f docker-compose.yml -f docker-compose.override.yml down
+
+$ az acr list --resource-group myResourceGroup --query "[].{acrLoginServer:loginServer}" --output table
+AcrLoginServer
+----------------------
+shoppingacr.azurecr.io
+
+$ docker tag shoppingclient:latest shoppingacr.azurecr.io/shoppingclient:v2
+
+# PUSH v2 VERSION TO AZURE CONTAINER REGISTRY (ACR):
+# LOGIN FIRST
+$ az acr login --name shoppingacr
+Login Succeeded
+$ docker push shoppingacr.azurecr.io/shoppingclient:v2
+v2: digest: sha256:00ac404454b8a04c4ca313c69a1cf0bf7cc9e18880d3f5b171b0a5ed1eb8ab94 size: 1995
+# CHECK TO SEE IF THE PUSH WORKED
+$ az acr repository list --name shoppingacr --output table
+Result
+--------------
+shoppingapi
+shoppingclient
+
+$ az acr repository show-tags --name shoppingacr --repository shoppingclient --output table
+Result
+--------
+v1
+v2
+
 
 
 
