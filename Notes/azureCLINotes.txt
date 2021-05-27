@@ -1,5 +1,62 @@
 $ az --version
 
+$ az login --use-device-code
+
+# Create Azure Resource Group
+az group create -l centralus -n MyResourceGroup
+
+# Create Azure Container Registry (ACR):
+$ az acr create --resource-group myResourceGroup --name shoppingacr --sku Basic
+
+"adminUserEnabled": false
+"location": "centralus",
+"loginServer": "shoppingacr.azurecr.io",
+"name": "shoppingacr",
+
+# Enable Admin User Account
+$ az acr update -n shoppingacr --admin-enabled true
+
+  "adminUserEnabled": true,
+  "location": "centralus",
+  "loginServer": "shoppingacr.azurecr.io",
+  "name": "shoppingacr",
+
+# Log into Azure Container Registry (ACR):
+$ az acr login --name shoppingacr
+Login Succeeded
+
+$ az acr list --resource-group myResourceGroup --query "[].{acrLoginServer:loginServer}" --output table
+AcrLoginServer
+----------------------
+shoppingacr.azurecr.io
+
+$ docker tag shoppingapi:latest shoppingacr.azurecr.io/shoppingapi:v1
+shoppingacr.azurecr.io/shoppingapi      v1                                                      d148712d49a1
+
+$ docker tag shoppingclient:latest shoppingacr.azurecr.io/shoppingclient:v1
+shoppingacr.azurecr.io/shoppingclient   v1                                                      ec7b18504827
+
+$ docker push shoppingacr.azurecr.io/shoppingapi:v1
+v1: digest: sha256:a405c5680d2f6f03ecbaa7014d3962b66b88b5fe1435486fe81d0fc09e0ebe5e size: 1995
+
+$ docker push shoppingacr.azurecr.io/shoppingclient:v1
+v1: digest: sha256:7db3dc8bdcfc412b423ecf04e8031f8bf58ed89b1f85a2d1d0d1e60707cf554c size: 1995
+
+$ az acr repository list --name shoppingacr --output table
+Result
+--------------
+shoppingapi
+shoppingclient
+
+$ az acr repository show-tags --name shoppingacr --repository shoppingclient --output table
+Result
+--------
+v1
+
+
+===========================================================================================================================
+===========================================================================================================================
+$ az login 
 $ az acr login --name shoppingacr
 Login Succeeded
 

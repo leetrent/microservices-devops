@@ -1,0 +1,22 @@
+dev.azure.com/leetrentcons
+https://dev.azure.com/leetrentcons/
+
+Organization:
+leetrentcons
+
+Project:
+shopping
+
+Docker:
+Build and push an image to Azure Container Registry
+
+Container Registry:
+shoppingacr
+
+Image Name:
+leetrentmicroservicesdevops
+
+DockerFile:
+$(Build.SourcesDirectory)/Shopping/Shopping.API/Dockerfile
+
+
