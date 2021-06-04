@@ -53,7 +53,32 @@ Result
 --------
 v1
 
+# Create AKS Cluster
+$ az aks create --resource-group myResourceGroup --name myAKSCluster --node-count 1 --generate-ssh-keys --attach-acr shoppingacr
 
+$ az aks install-cli
+
+$ az acr login --name shoppingacr
+Login Succeeded
+
+$ az aks get-credentials --resource-group myResourceGroup --name myAKSCluster
+
+$ az aks get-credentials --resource-group myResourceGroup --name myAKSCluster
+Merged "myAKSCluster" as current context in C:\Users\Lee\.kube\config
+
+$ k get all
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.0.0.1     <none>        443/TCP   4d12h
+
+$ k get nodes
+NAME                                STATUS   ROLES   AGE     VERSION
+aks-nodepool1-64550165-vmss000000   Ready    agent   4d12h   v1.19.9
+
+$ k create secret docker-registry acr-secret \ --docker-server=<my-docker-server> \ --docker-username=<my-docker-username> \ --docker-password=<my-docker-password> \ --docker-email=<my-docker-email>
+
+$ k get secret
+
+===========================================================================================================================
 ===========================================================================================================================
 ===========================================================================================================================
 $ az login 

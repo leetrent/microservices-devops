@@ -1,5 +1,7 @@
 alias "k=kubectl"
 
+kubectl delete pods <pod> --grace-period=0 --force
+
 k apply -f ./nginx-depl.yaml
 
 $ k get deployments
